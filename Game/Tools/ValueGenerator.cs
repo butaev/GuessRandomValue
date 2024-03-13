@@ -1,6 +1,6 @@
 ﻿namespace RandomValue.Tools;
 
-internal class ValueGenerator
+internal class ValueGenerator : IValueGenerator
 {
     private readonly Random _random = new();
     private readonly int _min;

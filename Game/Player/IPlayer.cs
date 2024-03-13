@@ -2,5 +2,5 @@
 
 internal interface IPlayer
 {
-    int TryGuess();
+    int? TryGuess();
 }

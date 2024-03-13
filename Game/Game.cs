@@ -12,17 +12,17 @@ internal class Game
 
     private readonly int _value;
 
-    public Game(IGameConfig config)
+    public Game(IGameConfig config, IValueGenerator valueGenerator, IPlayersFactory factory)
     {
         _config = config;
         _players = new List<IPlayer>();
         for (var i = 0; i < _config.PlayersCount; i++)
         {
-            _players.Add(PlayersFactory.CreatePlayer());
+            _players.Add(factory.CreatePlayer());
         }
 
         _stats = _players.ToDictionary(p => p, _ => (false, 0));
-        _value = new ValueGenerator(config.Min, config.Max).GetValue();
+        _value = valueGenerator.GetValue();
     }
 
     public void Start()
@@ -40,6 +40,7 @@ internal class Game
             {
                 HandlePlayer(i);
             }
+
             Console.WriteLine("-----------------------------");
         }
     }
@@ -97,8 +98,14 @@ internal class Game
         }
     }
 
-    private bool RightGuess(int value)
+    private bool RightGuess(int? value)
     {
+        if (value == null)
+        {
+            Console.WriteLine("Invalid value");
+            return false;
+        }
+
         if (value < _value)
         {
             Console.WriteLine("Less");

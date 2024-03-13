@@ -2,19 +2,16 @@
 
 internal class ConsolePlayer : IPlayer
 {
-    public int TryGuess()
+    public int? TryGuess()
     {
         Console.WriteLine("Write guess number:");
-        var number = 0;
-        try
+
+        var input = Console.ReadLine();
+        if (int.TryParse(input, out var value))
         {
-            number = int.Parse(Console.ReadLine().Split().FirstOrDefault());
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Wasted");
+            return value;
         }
 
-        return number;
+        return null;
     }
 }

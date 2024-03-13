@@ -1,6 +1,6 @@
 ﻿namespace RandomValue.Player;
 
-internal static class PlayersFactory
+internal class PlayersFactory : IPlayersFactory
 {
-    public static IPlayer CreatePlayer() => new ConsolePlayer();
+    public IPlayer CreatePlayer() => new ConsolePlayer();
 }

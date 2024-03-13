@@ -1,4 +1,6 @@
 ﻿using System.Text.Json;
+using RandomValue.Player;
+using RandomValue.Tools;
 
 namespace RandomValue;
 
@@ -6,11 +8,22 @@ internal class Program
 {
     private static void Main()
     {
-        string path = @"Config/config.json";
+        const string path = @"Config/config.json";
         var configData = File.ReadAllText(path);
-        var config = JsonSerializer.Deserialize<Config.GameConfig>(configData);
-        var game = new Game(config);
-        game.Start();
-        Console.WriteLine();
+        try
+        {
+            var config = JsonSerializer.Deserialize<Config.GameConfig>(configData);
+            if (config == null)
+                throw new NullReferenceException("Invalid config initialization");
+            var valueGenerator = new ValueGenerator(config.Min, config.Max);
+            var playersFactory = new PlayersFactory();
+            var game = new Game(config, valueGenerator, playersFactory);
+            game.Start();
+            Console.ReadKey();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 }
