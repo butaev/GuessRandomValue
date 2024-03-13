@@ -1,0 +1,29 @@
+## Visual Studio и JetBrains Rider
+
+# Общие файлы
+*/bin/
+*/obj/
+*/packages/
+*/Properties/launchSettings.json
+
+# Visual Studio
+/.vs/
+/coverage/
+
+# JetBrains Rider
+/.idea/
+/.rider/
+
+# Файлы, которые могут быть сгенерированы автоматически
+**/bin/Debug/
+**/bin/Release/
+**/obj/Debug/
+**/obj/Release/
+
+# Файлы и папки, которые обычно не нужны в репозитории
+**/.git/
+**/.svn/
+**/.hg/
+**/.bzr/
+**/.DS_Store/
+**/node_modules/
